@@ -7,6 +7,9 @@ webapp/config.py
 .komodotools
 *.komodoproject
 
+# IntelliJ IDEA
+.idea
+
 # Mac OS-X
 .DS_Store
 ._*
