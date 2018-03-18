@@ -11,140 +11,143 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 """
 
 from flask_wtf import FlaskForm
-from wtforms import (BooleanField, TextField, HiddenField, PasswordField, DecimalField, DateTimeField, validators, IntegerField, SubmitField, TextAreaField, SelectField)
+from wtforms import (BooleanField, TextField, HiddenField, PasswordField, DecimalField, DateTimeField, validators,
+                     IntegerField, SubmitField, TextAreaField, SelectField)
 from . import PersonalConstants
 from ..common.countrycodes import country_codes
 
+
 class SensorSettingsForm(FlaskForm):
-  name = TextField(
-    'Interner Name des Sensors (veröffentlicht wird nur die Sensor-UID)',
-    [
-      validators.Required(
-        message='Bitte geben Sie einen Sensornamen an.'
-      )
-    ]
-  )
-  street_name = TextField(
-    'Straße',
-    [
-      validators.Required(
-        message='Bitte geben Sie einen Straßennamen an.'
-      )
-    ]
-  )
-  street_number = TextField('Hausnummer')
-  postalcode = TextField(
-    'Postleitzahl',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine Postleitzahl an.'
-      )
-    ]
-  )
-  city = TextField(
-    'Ort',
-    [
-      validators.Required(
-        message='Bitte geben Sie einen Ort an.'
-      )
-    ]
-  )
-  country = SelectField(
-    'Staat',
-    [
-      validators.Required(
-        message='Bitte geben Sie einen Staat an.'
-      )
-    ],
-    choices = country_codes,
-    default='DE'
-  )
-  lat = TextField(
-    'Geographischer Längengrad',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine geographische Länge an.'
-      )
-    ]
-  )
-  lon = TextField(
-    'Geographischer Breitengrad',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine geographische Breite an.'
-      )
-    ]
-  )
-  height = IntegerField(
-    'Höhe des Sensors über dem Boden (in cm)',
-    [
-      validators.Required(
-        message='Bitte geben Sie die Höhe des Sensors über dem Boden an.'
-      )
-    ]
-  )
-  sensor_position = IntegerField(
-    'Befestigungsort des Sensors am Haus. 1 = auf der Gartenseite, sehr gut abgeschirmt von allen Straßen, 10 = der Sensor ist an einer Hauswand direkt an der Straße. Bei diesem Wert ist irrelevant, wie groß die Straße ist, es geht nur darum, wo der Sensor am Haus angebracht ist.',
-    [
-      validators.Required(
-        message='Bitte geben Sie den Befestigungsort des Sensors an.'
-      )
-    ]
-  )
-  industry_in_area = IntegerField(
-    'Wie viel verarbeitende Industrie (also keine Büroflächen, sondern potentielle Feinstaubproduzenten) befinden sich in 100 m Radius? 1 = sehr wenig, 10 = sehr viel.',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine Einschätzung an.'
-      ),
-      validators.NumberRange(
-        min = 1,
-        max = 10,
-        message='Bitte geben Sie einen Wert von 1 bis 10 an'
-      )
-    ]
-  )
-  oven_in_area = IntegerField(
-    'Wie viele private Öfen oder Kamine befinden sich in 100 m Radius? Riecht es in Ihrem Wohngebiet sehr nach solchem Rauch? 1 = sehr wenig, 10 = sehr viel.',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine Einschätzung an.'
-      ),
-      validators.NumberRange(
-        min = 1,
-        max = 10,
-        message='Bitte geben Sie einen Wert von 1 bis 10 an'
-      )
-    ]
-  )
-  traffic_in_area = IntegerField(
-    'Wie stark befahren sind die Straßen in 100 m Radius? Wie nah dran sind solche Straßen? 1 = sehr wenig weiter weg, 10 = sehr viel Verkehr direkt vor der Haustür.',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine Einschätzung an.'
-      ),
-      validators.NumberRange(
-        min = 1,
-        max = 10,
-        message='Bitte geben Sie einen Wert von 1 bis 10 an'
-      )
-    ]
-  )
-  description = TextAreaField(
-    'Kurze Beschreibung des Sensor-Standortes inkl. seiner Besonderheiten'
-  )
-  submit = SubmitField('Einstellungen speichern')
+    name = TextField(
+        'Interner Name des Sensors (veröffentlicht wird nur die Sensor-UID)',
+        [
+            validators.Required(
+                message='Bitte geben Sie einen Sensornamen an.'
+            )
+        ]
+    )
+    street_name = TextField(
+        'Straße',
+        [
+            validators.Required(
+                message='Bitte geben Sie einen Straßennamen an.'
+            )
+        ]
+    )
+    street_number = TextField('Hausnummer')
+    postalcode = TextField(
+        'Postleitzahl',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine Postleitzahl an.'
+            )
+        ]
+    )
+    city = TextField(
+        'Ort',
+        [
+            validators.Required(
+                message='Bitte geben Sie einen Ort an.'
+            )
+        ]
+    )
+    country = SelectField(
+        'Staat',
+        [
+            validators.Required(
+                message='Bitte geben Sie einen Staat an.'
+            )
+        ],
+        choices=country_codes,
+        default='DE'
+    )
+    lat = TextField(
+        'Geographischer Längengrad',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine geographische Länge an.'
+            )
+        ]
+    )
+    lon = TextField(
+        'Geographischer Breitengrad',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine geographische Breite an.'
+            )
+        ]
+    )
+    height = IntegerField(
+        'Höhe des Sensors über dem Boden (in cm)',
+        [
+            validators.Required(
+                message='Bitte geben Sie die Höhe des Sensors über dem Boden an.'
+            )
+        ]
+    )
+    sensor_position = IntegerField(
+        'Befestigungsort des Sensors am Haus. 1 = auf der Gartenseite, sehr gut abgeschirmt von allen Straßen, 10 = der Sensor ist an einer Hauswand direkt an der Straße. Bei diesem Wert ist irrelevant, wie groß die Straße ist, es geht nur darum, wo der Sensor am Haus angebracht ist.',
+        [
+            validators.Required(
+                message='Bitte geben Sie den Befestigungsort des Sensors an.'
+            )
+        ]
+    )
+    industry_in_area = IntegerField(
+        'Wie viel verarbeitende Industrie (also keine Büroflächen, sondern potentielle Feinstaubproduzenten) befinden sich in 100 m Radius? 1 = sehr wenig, 10 = sehr viel.',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine Einschätzung an.'
+            ),
+            validators.NumberRange(
+                min=1,
+                max=10,
+                message='Bitte geben Sie einen Wert von 1 bis 10 an'
+            )
+        ]
+    )
+    oven_in_area = IntegerField(
+        'Wie viele private Öfen oder Kamine befinden sich in 100 m Radius? Riecht es in Ihrem Wohngebiet sehr nach solchem Rauch? 1 = sehr wenig, 10 = sehr viel.',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine Einschätzung an.'
+            ),
+            validators.NumberRange(
+                min=1,
+                max=10,
+                message='Bitte geben Sie einen Wert von 1 bis 10 an'
+            )
+        ]
+    )
+    traffic_in_area = IntegerField(
+        'Wie stark befahren sind die Straßen in 100 m Radius? Wie nah dran sind solche Straßen? 1 = sehr wenig weiter weg, 10 = sehr viel Verkehr direkt vor der Haustür.',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine Einschätzung an.'
+            ),
+            validators.NumberRange(
+                min=1,
+                max=10,
+                message='Bitte geben Sie einen Wert von 1 bis 10 an'
+            )
+        ]
+    )
+    description = TextAreaField(
+        'Kurze Beschreibung des Sensor-Standortes inkl. seiner Besonderheiten'
+    )
+    submit = SubmitField('Einstellungen speichern')
+
 
 class SensorGiveForm(FlaskForm):
-  email = TextField(
-    'E-Mail Adresse des Empfängers',
-    [
-      validators.Required(
-        message='Bitte geben Sie eine E-Mail-Adresse an'
-      ),
-      validators.Email(
-        message='Bitte geben Sie eine korrekte Mailadresse an.'
-      )
-    ]
-  )
-  submit = SubmitField('Sensor übergeben')
+    email = TextField(
+        'E-Mail Adresse des Empfängers',
+        [
+            validators.Required(
+                message='Bitte geben Sie eine E-Mail-Adresse an'
+            ),
+            validators.Email(
+                message='Bitte geben Sie eine korrekte Mailadresse an.'
+            )
+        ]
+    )
+    submit = SubmitField('Sensor übergeben')

@@ -1,0 +1,64 @@
+version: '3'
+services:
+  flask:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    ports:
+      - 5000:5000
+    container_name: luftdaten-flask
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    entrypoint: ["python3", "runserver.py"]
+
+  worker:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    container_name: luftdaten-worker
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    entrypoint: ["celery", "-A", "webapp.celery_entry_point", "worker"]
+
+  gulp:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.gulp
+    container_name: luftdaten-gulp
+    volumes:
+      - .:/app
+    entrypoint: ["gulp", 'watch']
+
+  redis:
+    image: redis
+    container_name: luftdaten-redis
+    ports:
+      - 6379:6379
+
+  mysql:
+    image: mariadb
+    container_name: luftdaten-mysql
+    volumes:
+      - .:/app
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: luftdaten-phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_HOST: luftdaten-mysql
+

@@ -2,11 +2,6 @@
 webapp/config.py
 *.py[cod]
 
-# KomodoEdit
-*.komodoedit
-.komodotools
-*.komodoproject
-
 # Mac OS-X
 .DS_Store
 ._*
@@ -16,7 +11,8 @@ webapp/config.py
 # Enviroment
 venv
 migrations
-logs/*
+logs
+!logs/.gitkeep
 
 # Node, Bower, SASS
 .sass-cache

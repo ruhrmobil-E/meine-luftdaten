@@ -13,57 +13,58 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 import os
 from .common.constants import INSTANCE_FOLDER_PATH
 
+
 class DefaultConfig(object):
+    PROJECT_NAME = ""
+    PROJECT_URL = ''
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    PROJECT_VERSION = '0.1.0'
+    LOG_DIR = os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir, 'logs'))
 
-  PROJECT_NAME = ""
-  PROJECT_URL = ''
-  PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-  PROJECT_VERSION = '0.1.0'
-  LOG_DIR = os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir, 'logs'))
+    DEBUG = False
+    TESTING = False
 
-  DEBUG = False
-  TESTING = False
+    ADMINS = ['']
+    MAILS_FROM = ''
 
-  ADMINS = ['']
-  MAILS_FROM = ''
+    SECRET_KEY = ''
+    SECURITY_PASSWORD_SALT = ''
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_DATABASE_URI = ''
 
-  SECRET_KEY = ''
-  SECURITY_PASSWORD_SALT = ''
-  SQLALCHEMY_TRACK_MODIFICATIONS = False
-  SQLALCHEMY_ECHO = False
-  DEBUG = True
-  SQLALCHEMY_DATABASE_URI = ''
-  SECRET_KEY = ''
-  
-  MAIL_SERVER = ''
-  MAIL_PORT = 465
-  MAIL_USE_SSL = True
-  MAIL_USERNAME = ''
-  MAIL_PASSWORD = ''
-  
-  EXTERNAL_DATABASE_HOST = ''
-  EXTERNAL_DATABASE_USER = ''
-  EXTERNAL_DATABASE_PASSWORD = ''
-  EXTERNAL_DATABASE_DATABASE = ''
-  
-  MAPBOX_TOKEN = ''
-  PIWIK_HOST = ''
-  PIWIK_ID = ''
+    MAIL_SERVER = ''
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = ''
+    MAIL_PASSWORD = ''
+
+    EXTERNAL_DATABASE_HOST = ''
+    EXTERNAL_DATABASE_USER = ''
+    EXTERNAL_DATABASE_PASSWORD = ''
+    EXTERNAL_DATABASE_DATABASE = ''
+
+    MAPBOX_TOKEN = ''
+    PIWIK_HOST = ''
+    PIWIK_ID = ''
 
 
 class LocalConfig(DefaultConfig):
-  pass
+    pass
+
 
 class StagingConfig(DefaultConfig):
-   pass
+    pass
+
 
 class ProdConfig(DefaultConfig):
-   pass
+    pass
+
 
 def get_config(MODE):
-  SWITCH = {
-    'LOCAL'    : LocalConfig,
-    'STAGING'  : StagingConfig,
-    'PRODUCTION': ProdConfig
-  }
-  return SWITCH[MODE]
+    SWITCH = {
+        'LOCAL': LocalConfig,
+        'STAGING': StagingConfig,
+        'PRODUCTION': ProdConfig
+    }
+    return SWITCH[MODE]
